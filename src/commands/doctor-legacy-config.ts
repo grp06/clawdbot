@@ -219,7 +219,8 @@ export function normalizeLegacyConfigValues(cfg: ClawdbotConfig): {
   }
 
   const legacyAckReaction = cfg.messages?.ackReaction?.trim();
-  if (legacyAckReaction) {
+  const hasWhatsAppConfig = cfg.channels?.whatsapp !== undefined;
+  if (legacyAckReaction && hasWhatsAppConfig) {
     const hasWhatsAppAck = cfg.channels?.whatsapp?.ackReaction !== undefined;
     if (!hasWhatsAppAck) {
       const legacyScope = cfg.messages?.ackReactionScope ?? "group-mentions";
